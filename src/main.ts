@@ -2,30 +2,25 @@ import * as express from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import * as passport from 'passport-local';
 
-// APP INIT
+// Init
 const app = express();
 
-// Cors
+// Config
 app.use(cors());
-// Logger
 app.use(morgan('dev'));
-//Json Parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routers
-const UsersRouter = express.Router();
+import { AuthenticationRouter } from './routers/Auth.router';
 
-//Users Routes
-UsersRouter.route('/')
-  .get(async (req, res) => {
-    res.json("yes")
-  });
+// Routes
+app.use('/api/auth', new AuthenticationRouter.getRouter());
 
+// Start
 app.get('/', (request, response) => {
-  response.send('Hello world!');
+  response.send('Server is running');
 });
-
-app.use('/api/' + 'users', UsersRouter);
 app.listen(5000);
