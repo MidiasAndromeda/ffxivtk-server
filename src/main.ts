@@ -1,9 +1,9 @@
+require('dotenv').config();
 import * as express from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
-import * as passport from 'passport-local';
-
+const passportSetup = require('./config/passport-setup');
 // Init
 const app = express();
 
@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 import { AuthenticationRouter } from './routers/Auth.router';
 
 // Routes
-app.use('/api/auth', new AuthenticationRouter.getRouter());
+app.use(process.env.API_ROUTE + '/auth', new AuthenticationRouter().getRouter());
 
 // Start
 app.get('/', (request, response) => {
   response.send('Server is running');
 });
-app.listen(5000);
+app.listen(process.env.API_PORT);

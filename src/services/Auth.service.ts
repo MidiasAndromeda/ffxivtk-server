@@ -1,19 +1,9 @@
-import * as jwt from 'jsonwebtoken';
+import { Request, Response } from 'express';
 
-class User {
-    username: String;
-    password: String;
-}
-export class Authentication {
 
-    users: User[] = [
-        {
-            username: "Anthony",
-            password: "hashpassword"
-        },
-        {
-            username: "Pierre",
-            password: "hashpassword"
-        }
-    ];
+export class AuthenticationService {
+
+    signInWithGoogle(request: Request, response: Response) {
+        
+    }
 }
