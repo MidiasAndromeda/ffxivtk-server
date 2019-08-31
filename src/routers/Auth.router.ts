@@ -22,8 +22,8 @@ export class AuthenticationRouter {
     getRouter(): Router {
         var authService = new AuthenticationService();
 
-        // this.router.post('/signup', async (request: Request, response: Response) => {
-        //     let result = await authService.signUpWithUsernameAndPassword(request.body.username, request.body.password);
+        // this.router.post('/google', async function (request: Request, response: Response) {
+        //     let result: any = await authService.signInWithGoogle(request, response);
         //     response.statusCode = result.code;
         //     if (result.err) {
         //         response.json(result.err);
@@ -32,24 +32,19 @@ export class AuthenticationRouter {
         //     }
         // });
 
-        this.router.post('/google', async function (request: Request, response: Response) {
-            let result: any = await authService.signInWithGoogle(request, response);
-            response.statusCode = result.code;
-            if (result.err) {
-                response.json(result.err);
-            } else {
-                response.json(result.data);
-            }
-        });
-
         this.router.get('/google', passport.authenticate('google', {
             scope: ['profile']
         }));
 
         this.router.get('/google/redirect', passport.authenticate('google'), (request: Request, response: Response) => {
-            console.log('non')
-            response.send('you reached a callback');
+            response.redirect('/')
         });
+
+        this.router.get('/logout', (request: Request, response: Response) => {
+            request.logout();
+            response.redirect('/');
+        });
+
         return this.router;
 
     }
