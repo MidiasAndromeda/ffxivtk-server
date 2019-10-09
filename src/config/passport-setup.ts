@@ -1,14 +1,13 @@
 import * as passport from 'passport';
 import * as googleStrategy from 'passport-google-oauth20';
-import { User } from './../models/User.model';
-import { UserService } from '../services/User.service';
+import { Users } from './../models/User.model';
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-    User.findById(id)
+    Users.findById(id)
         .then((user) => {
             done(null, user);
         });
@@ -19,15 +18,15 @@ passport.use(new googleStrategy({
     clientID: process.env.GOOGLE_API_KEY,
     clientSecret: process.env.GOOGLE_API_SECRET,
 }, (accessToken, refreshToken, profile, done) => {
-    User.findOne({ googleId: profile.id })
+    console.log(profile);
+    Users.findOne({ googleId: profile.id })
         .then((currentUser) => {
             if (currentUser) {
                 done(null, currentUser);
             } else {
-                new User({
+                new Users({
                     username: profile.displayName,
                     googleId: profile.id,
-                    avatar: profile._json.image
                 })
                     .save()
                     .then((newUser) => {
