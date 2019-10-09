@@ -1,6 +1,4 @@
-import * as mongoose from 'mongoose';
 import { prop, Typegoose, ModelType, InstanceType } from '@hasezoey/typegoose';
-import { Schema } from 'inspector';
 
 class User extends Typegoose {
     @prop({ required: true })

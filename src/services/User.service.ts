@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Users } from '../models/User.model';
 
-
 export class UserService {
     // GET ALL
     getUsers(request: Request, response: Response) {
@@ -10,8 +9,8 @@ export class UserService {
                 response.send(error);
             }
             response.json(users);
-        })
-    }
+        });
+    };
 
     // GET 
     getUser(request: Request, response: Response) {
@@ -19,16 +18,13 @@ export class UserService {
             if (error) {
                 response.send(error);
             }
-            console.log(request.params.id);
-            console.log('\n');
-            console.log(user);
             response.json(user);
-        })
-    }
+        });
+    };
 
     // POST
     addUser(request: Request, response: Response) {
-        let newUser = new Users(request.body);
+        const newUser = new Users(request.body);
 
         newUser.save((error, user) => {
             if (error) {
@@ -36,7 +32,7 @@ export class UserService {
             }
             response.json(user);
         });
-    }
+    };
 
     // PUT
     updateUser(request: Request, response: Response) {
@@ -46,7 +42,7 @@ export class UserService {
             }
             response.json(updatedUser);
         });
-    }
+    };
 
     // DELETE
     deleteUser(request: Request, response: Response) {
@@ -56,5 +52,5 @@ export class UserService {
             }
             response.json(deletedUser);
         });
-    }
+    };
 }

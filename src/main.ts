@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000, // 1 day
-  keys: [process.env.SESSION_COOKIE_KEY]
-}))
+  keys: [process.env.SESSION_COOKIE_KEY],
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -32,11 +32,6 @@ app.use(process.env.API_ROUTE + '/auth', new AuthenticationRouter().getRouter())
 app.use(process.env.API_ROUTE + '/user', new UserRouter().getRouter());
 
 // Start
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, () => {
-  console.log('Connection with the MongoDB database successfully estabilshed.');
-});
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
-app.get('/', (request, response) => {
-  response.send('Server is running');
-});
 app.listen(process.env.API_PORT);

@@ -20,11 +20,11 @@ export class AuthenticationRouter {
 
     getRouter(): Router {
         this.router.get('/google', passport.authenticate('google', {
-            scope: ['profile']
+            scope: ['profile'],
         }));
 
         this.router.get('/google/redirect', passport.authenticate('google'), (request: Request, response: Response) => {
-            response.redirect('/')
+            response.redirect('/');
         });
 
         this.router.get('/logout', (request: Request, response: Response) => {
