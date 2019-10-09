@@ -25,11 +25,9 @@ app.use(passport.session());
 
 // Routers
 import { AuthenticationRouter } from './routers/Auth.router';
-import { UserRouter } from './routers/User.router';
 
 // Routes
 app.use(process.env.API_ROUTE + '/auth', new AuthenticationRouter().getRouter());
-app.use(process.env.API_ROUTE + '/user', new UserRouter().getRouter());
 
 // Start
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, () => {

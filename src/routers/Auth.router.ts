@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
+import { AuthenticationService } from './../services/Auth.service';
 import * as passport from 'passport';
 
 export class AuthenticationRouter {
@@ -19,6 +20,18 @@ export class AuthenticationRouter {
     }
 
     getRouter(): Router {
+        var authService = new AuthenticationService();
+
+        // this.router.post('/google', async function (request: Request, response: Response) {
+        //     let result: any = await authService.signInWithGoogle(request, response);
+        //     response.statusCode = result.code;
+        //     if (result.err) {
+        //         response.json(result.err);
+        //     } else {
+        //         response.json(result.data);
+        //     }
+        // });
+
         this.router.get('/google', passport.authenticate('google', {
             scope: ['profile']
         }));
@@ -33,5 +46,6 @@ export class AuthenticationRouter {
         });
 
         return this.router;
+
     }
 }

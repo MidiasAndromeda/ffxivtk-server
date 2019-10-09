@@ -1,7 +1,6 @@
 import * as passport from 'passport';
 import * as googleStrategy from 'passport-google-oauth20';
 import { User } from './../models/User.model';
-import { UserService } from '../services/User.service';
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

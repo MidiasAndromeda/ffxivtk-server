@@ -4,16 +4,8 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     username: String,
-    email: String,
     googleId: String,
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-    modifiedAt: {
-        type: Date,
-        default: Date.now()
-    }
+    avatar: String
 });
 
 export const User = mongoose.model('user', UserSchema);
