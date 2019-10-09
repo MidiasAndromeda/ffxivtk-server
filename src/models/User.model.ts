@@ -1,19 +1,18 @@
 import * as mongoose from 'mongoose';
+import { prop, Typegoose, ModelType, InstanceType } from '@hasezoey/typegoose';
+import { Schema } from 'inspector';
 
-const Schema = mongoose.Schema;
+class User extends Typegoose {
+    @prop({ required: true })
+    googleId?: string;
+    @prop()
+    username?: string;
+    @prop({ unique: true })
+    email: string;
+    @prop({ default: Date.now() })
+    createdAt: Date;
+    @prop({ default: Date.now() })
+    modifiedAt: Date;
+}
 
-const UserSchema = new Schema({
-    username: String,
-    email: String,
-    googleId: String,
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-    modifiedAt: {
-        type: Date,
-        default: Date.now()
-    }
-});
-
-export const User = mongoose.model('user', UserSchema);
+export const Users = new User().getModelForClass(User);

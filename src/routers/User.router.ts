@@ -24,7 +24,7 @@ export class UserRouter {
         this.router.get('/:id', (request: Request, response: Response) => this.userService.getUser(request, response));
         this.router.post('/', (request: Request, response: Response) => this.userService.addUser(request, response));
         this.router.put('/:id', (request: Request, response: Response) => this.userService.updateUser(request, response));
-        this.router.delete('/', (request: Request, response: Response) => this.userService.deleteUser(request, response));
+        this.router.delete('/:id', (request: Request, response: Response) => this.userService.deleteUser(request, response));
 
         return this.router;
     }
