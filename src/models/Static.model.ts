@@ -1,13 +1,15 @@
-import { prop, Typegoose, ModelType, InstanceType } from '@hasezoey/typegoose';
+import { prop, Typegoose } from '@hasezoey/typegoose';
 import * as mongoose from 'mongoose';
 
-class User extends Typegoose {
+class Static extends Typegoose {
     @prop({ required: true })
-    googleId?: string;
+    name: string;
     @prop()
-    username?: string;
-    @prop({ unique: true })
-    email: string;
+    icon?: string;
+    @prop()
+    fflogsURL?: string;
+    @prop()
+    websiteURL?: string;
     @prop({ default: Date.now() })
     createdAt: Date;
     @prop({ default: Date.now() })
@@ -19,4 +21,4 @@ class User extends Typegoose {
     }]
 }
 
-export const Users = new User().getModelForClass(User);
+export const Statics = new Static().getModelForClass(Static);
