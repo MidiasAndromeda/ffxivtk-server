@@ -4,8 +4,10 @@ import * as mongoose from 'mongoose';
 class DataCenter extends Typegoose {
     @prop({ required: true })
     name: string;
+    @prop({ required: true, maxlength: 2 })
+    location: string;
     @prop()
-    users: [{
+    servers: [{
         type: mongoose.Types.ObjectId,
         ref: 'Server'
     }]
