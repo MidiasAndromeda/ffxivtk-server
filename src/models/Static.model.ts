@@ -19,6 +19,11 @@ class Static extends Typegoose {
         type: mongoose.Types.ObjectId,
         ref: 'User'
     }]
+    @prop()
+    playType: {
+        type: mongoose.Types.ObjectId,
+        ref: 'PlayType'
+    }
 }
 
 export const Statics = new Static().getModelForClass(Static);
