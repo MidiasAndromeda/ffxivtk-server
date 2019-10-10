@@ -18,6 +18,7 @@ passport.use(new googleStrategy({
     clientID: process.env.GOOGLE_API_KEY,
     clientSecret: process.env.GOOGLE_API_SECRET,
 }, (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
     Users.findOne({ googleId: profile.id })
         .then((currentUser) => {
             if (currentUser) {
@@ -26,6 +27,7 @@ passport.use(new googleStrategy({
                 new Users({
                     username: profile.displayName,
                     googleId: profile.id,
+                    email: profile.emails[0].value
                 })
                     .save()
                     .then((newUser) => {
