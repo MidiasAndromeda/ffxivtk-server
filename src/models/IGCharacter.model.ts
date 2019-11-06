@@ -8,7 +8,7 @@ class IGCharacter extends Typegoose {
     avatar: string;
     @prop({ required: true })
     portrait: string;
-    @prop({ required: true })
+    @prop({ required: true, unique: true })
     apiId: string;
     @prop({ default: Date.now() })
     createdAt: Date;

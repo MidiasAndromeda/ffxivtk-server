@@ -26,10 +26,22 @@ app.use(passport.session());
 // Routers
 import { AuthenticationRouter } from './routers/Auth.router';
 import { UserRouter } from './routers/User.router';
+import { DataCenterRouter } from './routers/DataCenter.router';
+import { IGCharacterRouter } from './routers/IGCharacter.router';
+import { JobRouter } from './routers/Job.router';
+import { playTypeRouter } from './routers/PlayType.router';
+import { ServerRouter } from './routers/Server.router';
+import { StaticRouter } from './routers/Static.router';
 
 // Routes
 app.use(process.env.API_ROUTE + '/auth', new AuthenticationRouter().getRouter());
 app.use(process.env.API_ROUTE + '/user', new UserRouter().getRouter());
+app.use(process.env.API_ROUTE + '/datacenter', new DataCenterRouter().getRouter());
+app.use(process.env.API_ROUTE + '/igcharacter', new IGCharacterRouter().getRouter());
+app.use(process.env.API_ROUTE + '/job', new JobRouter().getRouter());
+app.use(process.env.API_ROUTE + '/playtype', new playTypeRouter().getRouter());
+app.use(process.env.API_ROUTE + '/server', new ServerRouter().getRouter());
+app.use(process.env.API_ROUTE + '/static', new StaticRouter().getRouter());
 
 // Start
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });

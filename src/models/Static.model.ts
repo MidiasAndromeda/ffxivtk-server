@@ -1,5 +1,6 @@
-import { prop, Typegoose } from '@hasezoey/typegoose';
+import { prop, Typegoose, arrayProp } from '@hasezoey/typegoose';
 import * as mongoose from 'mongoose';
+import { Users } from './User.model';
 
 class Static extends Typegoose {
     @prop({ required: true })
@@ -14,7 +15,7 @@ class Static extends Typegoose {
     createdAt: Date;
     @prop({ default: Date.now() })
     modifiedAt: Date;
-    @prop()
+    @arrayProp({ items: mongoose.Types.ObjectId })
     users: [{
         type: mongoose.Types.ObjectId,
         ref: 'User'
